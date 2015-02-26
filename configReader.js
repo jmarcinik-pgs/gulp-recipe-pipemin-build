@@ -1,16 +1,39 @@
 var paths = {};
 
 module.exports = function ($, config) {
-    var _ = $.lodash;
-    return _.merge({
+    return $.lodash.merge({
+        // defaults
+        sources: {
+            rawAssets: []
+        },
+        order: {
+            pipeminMinify: 100
+        },
         tasks: {
-            pipeminBuild: config.tasks.build || 'build',
-            pipeminCleanDist: config.tasks.cleanDist || 'clean:dist',
+            pipeminBuild: 'build',
+            pipeminCleanDist: 'clean:dist',
+            pipeminPackage: 'package'
         },
         paths: {
-            pipeminDist: config.paths.dist || 'dist/',
-            pipeminPackage: config.paths.package || 'package.zip'
+            pipeminDist: 'dist/',
+            pipeminPackage: 'package.zip'
         },
-        revReplaceExtensions: config.revReplaceExtensions || ['.js', '.css', '.html', '.json']
+        revReplaceExtensions: ['.js', '.css', '.html', '.json']
+    }, {
+        // config names fallback to generics
+        order: {
+            pipeminMinify: config.order.minify
+        },
+        tasks: {
+            pipeminBuild: config.tasks.build,
+            pipeminCleanDist: config.tasks.cleanDist,
+            pipeminPackage: config.tasks.package
+        },
+        paths: {
+            pipeminDist: config.paths.dist,
+            pipeminPackage: config.paths.package
+        },
+        revReplaceExtensions: config.revReplaceExtensions
+        // specific config
     }, config);
 };

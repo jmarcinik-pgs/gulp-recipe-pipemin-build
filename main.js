@@ -1,4 +1,4 @@
 module.exports = {
-    recipe: require('./receipe'),
+    recipe: require('./recipe'),
     configReader: require('./configReader')
 };
