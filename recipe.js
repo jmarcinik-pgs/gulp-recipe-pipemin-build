@@ -7,7 +7,8 @@
  * @merged asset Source assets to be used in pipemin blocks
  * @merged build Files appended to first build stage, before postBuild
  * @sequential preBuild Before pipemin, on source html files
- * @sequential postBuild After pipemin, on all files it outputs and from build hook
+ * @sequential postBuild On all files from different build hooks
+ * @sequential postMerge After pipemin, on all files it outputs and from build hook
  * @sequential processJs Actions to perform on JS assets extracted by pipemin
  * @sequential processCss Actions to perform on CSS assets extracted by pipemin
  * @sequential processHtml Actions to perform on pipemin html output
@@ -42,6 +43,7 @@ module.exports = function ($, config, sources) {
         var buildPipe = $.utils.mergedLazypipe($.utils.getPipes('build'));
         var preBuildPipe = $.utils.sequentialLazypipe($.utils.getPipes('preBuild'));
         var postBuildPipe = $.utils.sequentialLazypipe($.utils.getPipes('postBuild'));
+        var postMergePipe = $.utils.sequentialLazypipe($.utils.getPipes('postMerge'));
         var processJsPipe = $.utils.sequentialLazypipe($.utils.getPipes('processJs'));
         var processCssPipe = $.utils.sequentialLazypipe($.utils.getPipes('processCss'));
         var processHtmlPipe = $.utils.sequentialLazypipe($.utils.getPipes('processHtml'));
@@ -56,8 +58,8 @@ module.exports = function ($, config, sources) {
                 html: processHtmlPipe
             });
 
-        return $.utils.mergedLazypipe([pipeminPipe, buildPipe])
-            .pipe(postBuildPipe)
+        return $.utils.mergedLazypipe([pipeminPipe, buildPipe.pipe(postBuildPipe)])
+            .pipe(postMergePipe)
             .pipe($.gulp.dest, config.paths.pipeminDist)
             .pipe($.size)();
     });
