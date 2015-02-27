@@ -1,7 +1,7 @@
 {
   "name": "gulp-recipe-pipemin-build",
-  "version": "1.0.0",
-  "description": "Receipe for PGS gulp build system",
+  "version": "0.1.0",
+  "description": "Receipe for fast build using pipemin",
   "main": "main.js",
   "scripts": {
     "test": "exit 0"
@@ -10,8 +10,8 @@
     "PGS",
     "gulp",
     "gulp-receipe",
-    "autoload",
     "pipemin",
+    "autoload",
     "build"
   ],
   "author": "PGS Front",
