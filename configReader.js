@@ -17,8 +17,7 @@ module.exports = function ($, config) {
         paths: {
             pipeminDist: 'dist/',
             pipeminPackage: 'package.zip'
-        },
-        revReplaceExtensions: ['.js', '.css', '.html', '.json']
+        }
     }, {
         // config names fallback to generics
         order: {
@@ -32,8 +31,7 @@ module.exports = function ($, config) {
         paths: {
             pipeminDist: config.paths.dist,
             pipeminPackage: config.paths.package
-        },
-        revReplaceExtensions: config.revReplaceExtensions
+        }
         // specific config
     }, config);
 };
