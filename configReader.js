@@ -1,11 +1,11 @@
 var paths = {};
 
 module.exports = function ($, config) {
+
+    $.utils.checkMandatory(config, ['sources.rawAssets', 'sources.index']);
+
     return $.lodash.merge({
         // defaults
-        sources: {
-            rawAssets: []
-        },
         order: {
             pipeminMinify: 100
         },
