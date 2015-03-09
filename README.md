@@ -4,6 +4,19 @@
 Container for fast project compilation with hooks, based on [gulp-pipemin](https://github.com/Frizi/gulp-pipemin).
 
 ## Tasks
+### build
+> deps: clean:dist
+
+Build whole project into dist directory.
+
+### package
+> deps: build
+
+Make zip package file ready for deployment.
+
+### clean:dist
+
+Delete dist directory and its contents.
 
 ## Configuration
 ### Recipe specific
