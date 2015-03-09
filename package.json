@@ -1,6 +1,6 @@
 {
   "name": "gulp-recipe-pipemin-build",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Receipe for fast build using pipemin",
   "main": "main.js",
   "repository": {
