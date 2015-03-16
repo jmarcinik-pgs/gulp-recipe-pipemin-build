@@ -24,11 +24,9 @@ module.exports = function ($, config, sources) {
      * @config tasks.pipeminCleanDist
      * @config tasks.cleanDist
      */
-    $.gulp.task(config.tasks.pipeminCleanDist, function cleanDistTask(cb) {
+    function cleanDistTask(cb) {
         return $.rimraf(config.paths.pipeminDist, cb);
-    });
-
-    // merge multiple lazypipes into one
+    }
 
     /**
      * Main build task
@@ -38,7 +36,7 @@ module.exports = function ($, config, sources) {
      * @config tasks.build
      * @deps clean:dist
      */
-    $.gulp.task(config.tasks.pipeminBuild, [config.tasks.pipeminCleanDist], function buildTask() {
+    function buildTask() {
         var assetPipe = $.utils.mergedLazypipe($.utils.getPipes('asset'));
         var buildPipe = $.utils.mergedLazypipe($.utils.getPipes('build'));
         var preBuildPipe = $.utils.sequentialLazypipe($.utils.getPipes('preBuild'));
@@ -62,7 +60,7 @@ module.exports = function ($, config, sources) {
             .pipe(postMergePipe)
             .pipe($.gulp.dest, config.paths.pipeminDist)
             .pipe($.size)();
-    });
+    }
 
     /**
      * Builds and prepares package for deployment
@@ -72,11 +70,15 @@ module.exports = function ($, config, sources) {
      * @config tasks.package
      * @deps build
      */
-    $.gulp.task(config.tasks.pipeminPackage, [config.tasks.pipeminBuild], function () {
+    function pipeminPackageTask() {
         return $.gulp.src(config.paths.pipeminDist+ '**/*')
             .pipe($.zip(config.paths.pipeminPackage))
             .pipe($.gulp.dest('.'));
-    });
+    }
+
+    $.utils.maybeTask(config.tasks.pipeminBuild, [config.tasks.pipeminCleanDist], buildTask);
+    $.utils.maybeTask(config.tasks.pipeminPackage, [config.tasks.pipeminBuild], pipeminPackageTask);
+    $.utils.maybeTask(config.tasks.pipeminCleanDist, cleanDistTask);
 
     return {
         pipes: {
