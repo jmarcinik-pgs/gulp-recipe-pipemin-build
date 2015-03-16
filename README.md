@@ -51,6 +51,11 @@ sources.rawAssets = [
 ];
 ```
 
+#### sources.rawBuild
+> flow: sources.rawBuild -> pipes.build* hook
+
+Files that will be added to final build bypassing pipemin.
+
 ### Paths
 #### paths.pipeminDist
 > alias: paths.dist<br>

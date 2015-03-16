@@ -6,6 +6,9 @@ module.exports = function ($, config) {
 
     return $.lodash.merge({
         // defaults
+        sources: {
+            rawBuild: []
+        },
         order: {
             pipeminMinify: 100
         },
