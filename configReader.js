@@ -10,7 +10,8 @@ module.exports = function ($, config) {
             rawBuild: []
         },
         order: {
-            pipeminMinify: 100
+            pipeminMinify: 100,
+            assetSort: 100
         },
         tasks: {
             pipeminBuild: 'build',

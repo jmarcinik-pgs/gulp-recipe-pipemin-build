@@ -103,6 +103,11 @@ Minification task order in build processing pipe.
 
 Additional asset sources, good for injecting compiled files into index.html and minification process.
 
+#### pipes.postAssets*
+> type: sequence<br>
+
+Do actions on files from pipes.asset* before piping them into pipemin.
+
 #### pipes.build*
 > type: source<br>
 > flow: pipes.build* -> pipes.postBuild* -> merge with pipemin's output -> pipes.postMerge* -> dest

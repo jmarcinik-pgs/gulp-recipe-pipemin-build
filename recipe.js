@@ -38,6 +38,7 @@ module.exports = function ($, config, sources) {
      */
     function buildTask() {
         var assetPipe = $.utils.mergedLazypipe($.utils.getPipes('asset'));
+        var postAssetPipe = $.utils.sequentialLazypipe($.utils.getPipes('postAsset'));
         var buildPipe = $.utils.mergedLazypipe($.utils.getPipes('build'));
         var preBuildPipe = $.utils.sequentialLazypipe($.utils.getPipes('preBuild'));
         var postBuildPipe = $.utils.sequentialLazypipe($.utils.getPipes('postBuild'));
@@ -50,7 +51,7 @@ module.exports = function ($, config, sources) {
             .pipe(sources.index)
             .pipe(preBuildPipe)
             .pipe($.pipemin, {
-                assetsStream: assetPipe,
+                assetsStream: assetPipe.pipe(postAssetPipe),
                 js: processJsPipe,
                 css: processCssPipe,
                 html: processHtmlPipe
@@ -83,13 +84,9 @@ module.exports = function ($, config, sources) {
     return {
         pipes: {
             // asset pipes, goes into pipemin in asset pipe
-            assetRaw: sources.rawAssets
-                .pipe($.utils.sortFiles),
-
-            buildRaw: sources.rawBuild
-                .pipe($.utils.sortFiles),
-
-
+            assetRaw: sources.rawAssets,
+            postAssetSort: [config.order.assetSort, $.utils.sortFiles],
+            buildRaw: sources.rawBuild,
             // process pipes, used inside pipemin only on referenced assets
             processJsMinify: [config.order.pipeminMinify, $.lazypipe()
                 .pipe(function () {
