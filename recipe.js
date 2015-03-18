@@ -84,9 +84,9 @@ module.exports = function ($, config, sources) {
     return {
         pipes: {
             // asset pipes, goes into pipemin in asset pipe
-            assetRaw: sources.rawAssets,
+            assetRaw: sources.assets,
             postAssetSort: [config.order.assetSort, $.utils.sortFiles],
-            buildRaw: sources.rawBuild,
+            buildRaw: sources.build,
             // process pipes, used inside pipemin only on referenced assets
             processJsMinify: [config.order.pipeminMinify, $.lazypipe()
                 .pipe(function () {

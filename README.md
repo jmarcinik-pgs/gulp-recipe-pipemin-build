@@ -33,16 +33,16 @@ Entry point html files (index.html) to be processed with [gulp-pipemin](https://
 sources.index = 'app/index.html';
 ```
 
-#### sources.rawAssets
+#### sources.assets
 > mandatory<br>
-> flow: sources.rawAssets -> pipes.asset* hook
+> flow: sources.assets -> pipes.asset* hook
 
 Files that will be treated as assets for pipemin. Names of these files will be fed to glob paths in index.html.
 Superfluous files are left untouched, but will be loaded into memory during build.
 
 > example config:
 ```javascript
-sources.rawAssets = [
+sources.assets = [
     'app/bower_components/*/*.js',
     'app/bower_components/*/{dist,min,release}/*.{js,css}', // most of the generic bower modules
     sources.js, // include only when serving non-processed js files
@@ -51,8 +51,8 @@ sources.rawAssets = [
 ];
 ```
 
-#### sources.rawBuild
-> flow: sources.rawBuild -> pipes.build* hook
+#### sources.build
+> flow: sources.build -> pipes.build* hook
 
 Files that will be added to final build bypassing pipemin.
 
