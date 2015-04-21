@@ -21,6 +21,11 @@ module.exports = function ($, config) {
         paths: {
             pipeminDist: 'dist/',
             pipeminPackage: 'package.zip'
+        },
+        pipeminBuild: {
+            htmlMinify: {empty: true, spare: true, quotes: true, conditionals: true},
+            csso: {},
+            uglify: {preserveComments: function () { return $.uglifySaveLicense.apply(this, arguments); }}
         }
     }, {
         // config names fallback to generics

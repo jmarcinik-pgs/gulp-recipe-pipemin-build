@@ -90,17 +90,17 @@ module.exports = function ($, config, sources) {
             // process pipes, used inside pipemin only on referenced assets
             processJsMinify: [config.order.pipeminMinify, $.lazypipe()
                 .pipe(function () {
-                    return $.uglify({preserveComments: $.uglifySaveLicense});
+                    return $.uglify(config.pipeminBuild.uglify);
                 })],
 
             processCssMinify: [config.order.pipeminMinify, $.lazypipe()
                 .pipe(function () {
-                    return $.csso();
+                    return $.csso(config.pipeminBuild.csso);
                 })],
 
             processHtmlMinify: [config.order.pipeminMinify, $.lazypipe()
                 .pipe(function () {
-                    return $.minifyHtml({empty: true, spare: true, quotes: true, conditionals: true});
+                    return $.minifyHtml(config.pipeminBuild.htmlMinify);
                 })]
         }
     };
