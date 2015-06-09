@@ -1,4 +1,4 @@
-# [gulp-recipe](https://github.com/PGS-dev/gulp-recipe-loader)-pipemin-build [![Dependency Status][depstat-image]][depstat-url]
+# [gulp-recipe](https://github.com/PGSSoft/gulp-recipe-loader)-pipemin-build [![Dependency Status][depstat-image]][depstat-url]
 [![NPM][npm-image]][npm-url]
 
 Container for fast project compilation with hooks, based on [gulp-pipemin](https://github.com/Frizi/gulp-pipemin).
@@ -21,7 +21,7 @@ Delete dist directory and its contents.
 ## Configuration
 ### Recipe specific
 
-### [Sources](https://github.com/PGS-dev/gulp-recipe-loader#sources-configuration-syntax)
+### [Sources](https://github.com/PGSSoft/gulp-recipe-loader#sources-configuration-syntax)
 #### sources.index
 > mandatory<br>
 > flow: sources.index -> pipes.preBuild* -> pipemin -> merge with build -> pipes.postMerge* -> dest
@@ -122,7 +122,7 @@ Do actions on index just before feeding it into pipemin.
 #### pipes.postBuild*
 > type: sequence<br>
 
-Do actions on files from pipes.build*. Example usage in [gulp-recipe-pipemin-rev](https://github.com/PGS-dev/gulp-recipe-pipemin-rev).
+Do actions on files from pipes.build*. Example usage in [gulp-recipe-pipemin-rev](https://github.com/PGSSoft/gulp-recipe-pipemin-rev).
 
 #### pipes.postMerge*
 > type: sequence<br>
@@ -163,5 +163,5 @@ Minify html
 
 [npm-url]: https://npmjs.org/package/gulp-recipe-pipemin-build
 [npm-image]: https://nodei.co/npm/gulp-recipe-pipemin-build.png?downloads=true
-[depstat-url]: https://david-dm.org/PGS-dev/gulp-recipe-pipemin-build
-[depstat-image]: https://img.shields.io/david/PGS-dev/gulp-recipe-pipemin-build.svg?style=flat
+[depstat-url]: https://david-dm.org/PGSSoft/gulp-recipe-pipemin-build
+[depstat-image]: https://img.shields.io/david/PGSSoft/gulp-recipe-pipemin-build.svg?style=flat
