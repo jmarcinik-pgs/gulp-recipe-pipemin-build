@@ -43,18 +43,26 @@ module.exports = function ($, config, sources) {
         var preBuildPipe = $.utils.sequentialLazypipe($.utils.getPipes('preBuild'));
         var postBuildPipe = $.utils.sequentialLazypipe($.utils.getPipes('postBuild'));
         var postMergePipe = $.utils.sequentialLazypipe($.utils.getPipes('postMerge'));
-        var processJsPipe = $.utils.sequentialLazypipe($.utils.getPipes('processJs'));
-        var processCssPipe = $.utils.sequentialLazypipe($.utils.getPipes('processCss'));
-        var processHtmlPipe = $.utils.sequentialLazypipe($.utils.getPipes('processHtml'));
+
+        var processPipe = function (prefix, concatOrder) {
+            return function (stream, concat) {
+                var pipes = $.utils.getPipes(prefix);
+                if(concat) {
+                    pipes.push([concatOrder, function() { return concat; }]);
+                }
+                var combined = $.utils.sequentialLazypipe(pipes);
+                return stream.pipe(combined());
+            }
+        };
 
         var pipeminPipe = $.lazypipe()
             .pipe(sources.index)
             .pipe(preBuildPipe)
             .pipe($.pipemin, {
                 assetsStream: assetPipe.pipe(postAssetPipe),
-                js: processJsPipe,
-                css: processCssPipe,
-                html: processHtmlPipe
+                js: processPipe('processJs', config.order.pipeminConcatJs),
+                css: processPipe('processCss', config.order.pipeminConcatJs),
+                html: processPipe('processHtml')
             });
 
         return $.utils.mergedLazypipe([pipeminPipe, buildPipe.pipe(postBuildPipe)])

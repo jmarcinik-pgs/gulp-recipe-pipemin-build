@@ -11,7 +11,9 @@ module.exports = function ($, config) {
         },
         order: {
             pipeminMinify: 100,
-            assetSort: 100
+            assetSort: 100,
+            pipeminConcatJs: 0,
+            pipeminConcatCss: 0
         },
         tasks: {
             pipeminBuild: 'build',
@@ -30,7 +32,9 @@ module.exports = function ($, config) {
     }, {
         // config names fallback to generics
         order: {
-            pipeminMinify: config.order.minify
+            pipeminMinify: config.order.minify,
+            pipeminConcatJs: config.order.concatJs !== void 0 ? config.order.concatJs : config.order.concat,
+            pipeminConcatCss: config.order.concatCss !== void 0 ? config.order.concatCss : config.order.concat
         },
         tasks: {
             pipeminBuild: config.tasks.build,
