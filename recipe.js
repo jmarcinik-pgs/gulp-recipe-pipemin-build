@@ -43,6 +43,7 @@ module.exports = function ($, config, sources) {
         var preBuildPipe = $.utils.sequentialLazypipe($.utils.getPipes('preBuild'));
         var postBuildPipe = $.utils.sequentialLazypipe($.utils.getPipes('postBuild'));
         var postMergePipe = $.utils.sequentialLazypipe($.utils.getPipes('postMerge'));
+        var processHtmlPipe = $.utils.sequentialLazypipe($.utils.getPipes('processHtml'));
 
         var processPipe = function (prefix, concatOrder) {
             return function (stream, concat) {
@@ -62,7 +63,7 @@ module.exports = function ($, config, sources) {
                 assetsStream: assetPipe.pipe(postAssetPipe),
                 js: processPipe('processJs', config.order.pipeminConcatJs),
                 css: processPipe('processCss', config.order.pipeminConcatJs),
-                html: processPipe('processHtml')
+                html: processHtmlPipe
             });
 
         return $.utils.mergedLazypipe([pipeminPipe, buildPipe.pipe(postBuildPipe)])
