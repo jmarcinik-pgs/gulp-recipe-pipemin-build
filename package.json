@@ -1,6 +1,6 @@
 {
   "name": "gulp-recipe-pipemin-build",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Receipe for fast build using pipemin",
   "main": "main.js",
   "repository": {
@@ -18,12 +18,12 @@
   "author": "PGS Front",
   "license": "ISC",
   "dependencies": {
-    "gulp-csso": "^1.0.0",
+    "gulp-csso": "^3.0.1",
     "gulp-minify-html": "^1.0.0",
     "gulp-pipemin": "^2.2.3",
-    "gulp-size": "^1.2.1",
-    "gulp-uglify": "^1.1.0",
-    "gulp-zip": "^3.0.2",
+    "gulp-size": "^3.0.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-zip": "^4.1.0",
     "rimraf": "^2.2.8",
     "uglify-save-license": "^0.4.1"
   }
